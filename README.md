@@ -18,7 +18,7 @@ Formally comment every C++ class in the header file, like so:
 		/*!
 		  @brief Here is the purpose of my class.
 		  Here is some detail on how to use it.
-		  @deprecated see class MyNewVersion because of such and such a version.
+		  @deprecated see class MyNewVersion because of such and such a reason.
 		 */
 		MyClass {
 		}
@@ -28,6 +28,7 @@ Similarly, comment every python class per pep-8.
 ## Function Comments
 
 Example:
+
 		/*!
 		  @brief This function computes X.
 		  More detailed explanation.
@@ -57,25 +58,26 @@ Similarly, comment every python function with complete meta information, like so
 **In python the burden on documentation is even higher because class types are not readily available.**  The
 developer should document the expectations for parameter types, valid values, and any side effects the function may have
 on a parameter's content.  Similarly, document the return value's type and meaning.
-Expected exceptions, error conditions, and deprecation should also be documented.
+Expected exceptions, error conditions, and deprecation justifications should also be documented.
 
 ## Namespace Comments
-If you write a formal comment for your namespace, doxygen will pick up and and give you a pretty class list page
+If you write a formal comment for your namespace, doxygen will pick it up and and make a pretty class list landing page
 for your namespace.  All you need to do is put a formal comment in front of one of your
 "using namespace XYZ" declarations, like so:
 
 		//! @brief Provides XYZ capability.
 		using namespace MyPackage {
+		<snip>
+		}
 
 ## Naming Conventions
 
 Readability always comes first.  If in your judgement a guideline doesn't improve readability, then do what is best for readability instead.  
 
 We give below some guidance on capitalization, but this is a relatively minor concern.  Of much higher concern is having descriptive names
-that match the way you discuss and present your code.  If your code is using an out-dated name, that's a much higher priority to fix.
+that match the way you discuss and present your code.  If your code is using an out-dated name, that's a high priority to fix.
 Also, beware of name overloading in the context of the broader project.  Try to avoid re-using the name your neighbor picked if you are
-referring to an object that is fundamentally different.  Do not sabotage the ability of someone new to learn your neighbor's
-software package.
+referring to an object that is fundamentally different.  Do not sabotage the ability of someone new to learn your software package.
 
 C++
 * NamespaceNames
@@ -112,13 +114,18 @@ Format python files with black, like so:
 
 		black --line-length 120 -t py36 *.py
 
+You can install black using pip3.
+
 Please consider the git log history when formatting.  Only run an auto-formatter when you have no local
 uncommitted changes and always commit reformatting changes with a useful message like: 'formatting only.'
-We separate major formatting-only commits from substantive feature development so that future
+We separate formatting-only commits from substantive feature development so that future
 log reviewers will be able to find the changes that are meaningful and ignore the changes that are
 purely eye candy.
 
 ## Other Random Bits
+
+### File Structure Should Match Code Structure
+
 Includes should use the full path, like:
 
 		#include "MySoftware/PackageName/Class.hpp"
@@ -127,10 +134,12 @@ This also goes for python:
 
 		import MySoftware.DirectoryName.PythonFileName
 
-Namespaces should match the directory path, so namespace "MySoftware::Foo" goes in directory MySoftware/Foo
-with include "MySoftware/Foo/Class.hpp".
+Namespaces should match the directory path, so classes in namespace MySoftware::Foo go in directory MySoftware/Foo/
+and includes are done as "include "MySoftware/Foo/Class.hpp"".
 
 The first include in a cpp file should be the corresponding header file.
+
+### Include Guards
 
 For header files, it's cleaner to use:
 
@@ -147,6 +156,8 @@ However, if you do use a UNIQUE_STRING, if should match the directory and file y
 
 		#ifndef MySoftware_Foo_Class_hpp
 
-Don't make liberal use of "auto" because it conceals the class type.  It makes life very difficult
-for future readers.  If the class type is not completely obvious from the context,
+### Auto Keyword
+
+Don't make liberal use of "auto" because it conceals the class type; making life difficult
+for future readers.  If the class type is not completely obvious from the context
 then take the time to write out the full type name.
