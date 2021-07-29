@@ -103,7 +103,7 @@ JSON key strings
 - "MAGIC_COMMAND_STRINGS"
 - "parameters_for_a_component"
 
-# Code Formatting
+## Code Formatting
 
 For C++, clang-format is used.  You will need at least version 7.0 to run with our clang-format file.  
 
