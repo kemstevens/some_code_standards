@@ -11,6 +11,16 @@ Two ground rules here:
 2. Write comments as you go.  All functions/methods/classes should have documentation.
 
 
+## Markdown Syntax
+There are many variants of Markdown, each with minor differences in how to accomplish a feature.  
+When documentation is rendered using Doxygen, the markdown syntax used in .md files should be consistent with Doxygen.  
+For details see <https://doxygen.nl/manual/markdown.html>.  
+In particular, please avoid the use of the triple backtick to delineate code sections.  Code exammples in markdown format should be denoted using 12 spaces.
+
+## No non-ASCII or non-printing characters
+For .md/.sh/.cpp/.hpp/.py/.conf/.json files, use ASCII encoding.  
+Do not include any non-printing characters (other than newline and carriage return).
+
 ## Header File Comments
 
 Formally comment every C++ class in the header file, like so:
@@ -24,6 +34,9 @@ Formally comment every C++ class in the header file, like so:
 		}
 
 Similarly, comment every python class per pep-8.
+
+The docstring for modules occurs at the top of the file.
+The docstring for classes and functions occurs immediately after the `clas` or `def`.
 
 ## Function Comments
 
@@ -59,6 +72,13 @@ Similarly, comment every python function with complete meta information, like so
 developer should document the expectations for parameter types, valid values, and any side effects the function may have
 on a parameter's content.  Similarly, document the return value's type and meaning.
 Expected exceptions, error conditions, and deprecation justifications should also be documented.
+
+Use of type hints using mypy is encouraged.  Example:
+
+            def my_func(a: int) -> int:
+	    	return a+2
+
+See <https://mypy-lang.org/examples.html>
 
 ## Namespace Comments
 If you write a formal comment for your namespace, doxygen will pick it up and and make a pretty class list landing page
@@ -121,6 +141,27 @@ uncommitted changes and always commit reformatting changes with a useful message
 We separate formatting-only commits from substantive feature development so that future
 log reviewers will be able to find the changes that are meaningful and ignore the changes that are
 purely eye candy.
+
+## Python
+
+Python scripts intended to be used on the command line should include `--help` and describe relevant configuration paraneters.
+
+## Shebangs
+
+The first line of every python file should be a shebang
+
+            #!/usr/bin/env python3
+
+The first line of every shell file should be a shebang:
+	        
+            #!/usr/bin/env bash
+
+
+## Jupyter Notebooks
+
+Jupyter notebooks enable the combination of documentation (include Latex), source code, and visualization.
+
+Prior to committing Jupyter notebooks to a version controlled repository (e.g. git), run the "restart kernal and clear all outputs" so the output from cells is not included in the repo.  The purpose of this policy is to keep the diffs in the repo logs free of clutter unrelated to the committed change.
 
 ## Other Random Bits
 
