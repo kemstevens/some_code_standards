@@ -78,7 +78,7 @@ Use of type hints using mypy is encouraged.  Example:
             def my_func(a: int) -> int:
 	    	return a+2
 
-See <https://mypy-lang.org/examples.html>
+See <http://mypy-lang.org/examples.html>
 
 ## Namespace Comments
 If you write a formal comment for your namespace, doxygen will pick it up and and make a pretty class list landing page
